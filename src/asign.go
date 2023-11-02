@@ -7,7 +7,7 @@ import (
 )
 
 func (l *Visitor) VisitAsign(ctx *parser.AsignContext, amb *Ambiente, gen *generador.Generador) interface{} {
-	variab := amb.getVar(ctx.ID().GetText()).(Variable)
+	variab := amb.getVar(ctx.ID().GetText()).(*Variable)
 	expr := l.Visit(ctx.Expr(), amb, gen).(Valor)
 	if expr.tipo == INT && variab.tipo == FLOAT {
 		if !expr.isTemp {

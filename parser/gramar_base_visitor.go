@@ -44,6 +44,10 @@ func (v *BaseGramarVisitor) VisitPrin(ctx *PrinContext) interface{} {
 	return v.VisitChildren(ctx)
 }
 
+func (v *BaseGramarVisitor) VisitCexpr(ctx *CexprContext) interface{} {
+	return v.VisitChildren(ctx)
+}
+
 func (v *BaseGramarVisitor) VisitSwhile(ctx *SwhileContext) interface{} {
 	return v.VisitChildren(ctx)
 }

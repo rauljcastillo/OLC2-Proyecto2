@@ -112,7 +112,12 @@ func (g *Generador) AddCommment(comment string) {
 }
 
 func (g *Generador) GetCode() string {
-	final := "double " + strings.Join(g.listaTemporal, ", ") + ";"
+	var final string
+	final = "#include <stdio.h>\ndouble heap[30000];\ndouble stack[30000];\ndouble H, P;\n\n"
+	if len(g.listaTemporal) > 0 {
+		final = final + "double " + strings.Join(g.listaTemporal, ", ") + ";"
+	}
+
 	final = final + "\n\n" + strings.Join(g.nativas, "")
 	final = strings.Join(g.functions, "") + final
 	main := "int main(){\n"

@@ -76,6 +76,18 @@ func (v *Visitor) VisitAritmetic(ctx *parser.AritmeticContext, amb *Ambiente, ge
 			gen.AddExpresion(temp, l.val.(string), r.val.(string), "/")
 			return Valor{val: temp, tipo: dom, isTemp: true}
 		}
+	case "%":
+		l := v.Visit(ctx.GetLeft(), amb, gen).(Valor)
+		r := v.Visit(ctx.GetRight(), amb, gen).(Valor)
+		temp := gen.NewTemporal()
+		dom := TablaT(l.tipo, r.tipo)
+		if dom == FLOAT {
+			gen.AddExpresion(temp, l.val.(string), r.val.(string), "%")
+			return Valor{val: temp, tipo: dom, isTemp: true}
+		} else if dom == INT {
+			gen.AddExpresion(temp, l.val.(string), r.val.(string), "%")
+			return Valor{val: temp, tipo: dom, isTemp: true}
+		}
 	case "<":
 		l := v.Visit(ctx.GetLeft(), amb, gen).(Valor)
 		r := v.Visit(ctx.GetRight(), amb, gen).(Valor)
@@ -159,6 +171,7 @@ func (v *Visitor) VisitAritmetic(ctx *parser.AritmeticContext, amb *Ambiente, ge
 		gen.Addif(l.val.(string), r.val.(string), "!=", truelbl)
 		gen.AddGoto(falselbl)
 		return Valor{tipo: BOOL, val: "", isTemp: false, labelTrue: truelbl, labelfalse: falselbl}
+
 	case "&&":
 		l := v.Visit(ctx.GetLeft(), amb, gen).(Valor)
 		gen.AddLabel(l.labelTrue)

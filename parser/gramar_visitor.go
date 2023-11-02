@@ -35,6 +35,9 @@ type GramarVisitor interface {
 	// Visit a parse tree produced by GramarParser#prin.
 	VisitPrin(ctx *PrinContext) interface{}
 
+	// Visit a parse tree produced by GramarParser#cexpr.
+	VisitCexpr(ctx *CexprContext) interface{}
+
 	// Visit a parse tree produced by GramarParser#swhile.
 	VisitSwhile(ctx *SwhileContext) interface{}
 

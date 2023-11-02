@@ -7,6 +7,9 @@ import (
 )
 
 func (l *Visitor) VisitPrin(ctx *parser.PrinContext, amb *Ambiente, gen *generador.Generador) interface{} {
+	if ctx.Cexpr() != nil {
+		l.Visit(ctx.Cexpr(), amb, gen)
+	}
 	value := l.Visit(ctx.Expr(), amb, gen).(Valor)
 	if value.tipo == INT {
 		gen.Printf("d", "(int)"+value.val.(string))

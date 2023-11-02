@@ -58,7 +58,13 @@ ccase: 'case' expr ':' block 'break'?
 
 pfor: 'for' ID 'in' ((expr POINTS expr)| expr) '{' block '}';
 
-prin: 'print' '(' expr ')';
+prin: 'print' '(' expr ')'
+    | 'print' '(' cexpr ')'';'?
+;
+
+cexpr: expr ',' cexpr
+    | expr
+;
 
 swhile: 'while'  expr '{' block '}';
 
@@ -108,6 +114,7 @@ tipoArg: PUNTE exp1=expr
     | ID ':' exp2=expr   
     | exp3=expr
 ;
+
 
 
 expr: op=('!'|'-') right=expr                              #aritmetic
